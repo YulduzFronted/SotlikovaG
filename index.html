@@ -47,11 +47,92 @@ tg.expand(); // Oynani to'liq ekranga ochish
 
 // Akademik darajadagi test savollari bazasi
 const testDatabase = {
-    "1": [
+    "1": [  
+        // I. KETMA-KETLIKNI ANIQLASH TESTLARI (4 ta)
         {
-            q: "Tinglovchining kasbiy amaliyot davomida muassasani rivojlantirish dasturi uchun material toʻplash bosqichlari boshlangʻich trayektoriyasini aniqlang:",
-            a: ["Amaliy topshiriqlarni bajarish rejasini shakllantirish", "Faqat moliyaviy audit xulosalarini tekshirish", "O'qituvchilarning darsga kelish davomatini yuritish"],
+            q: "Mehnat bozori tahlili natijalarini muassasada strategik qarorlar qabul qilish jarayoniga transformatsiya qilish bosqichlarining toʻgʻri ketma-ketligini aniqlang:\n1. Tashqi soʻrovlar, bitiruvchilar monitoringi va rasmiy statistika orqali empirik maʼlumotlarni yigʻish\n2. Yangi kasbiy koʻnikmalarni shakllantirish boʻyicha yakuniy oʻquv natijalarini muntazam monitoring qilish\n3. Aniqlangan ehtiyojlarni qondirish uchun muassasaning kadrlar, jihozlar va moliyaviy imkoniyatlarini baholash\n4. Dasturlarni yangilash, dual taʼlimni kengaytirish yoki resurslarni maqsadli yoʻnaltirish boʻyicha qaror qabul qilish",
+            a: ["A) 1, 3, 4, 2", "B) 1, 4, 3, 2", "C) 3, 1, 4, 2", "D) 3, 4, 1, 2"],
             correct: 0
+        },
+        {
+            q: "Kasbiy taʼlim tashkilotida uzoq muddatli maqsadlardan boshlab kundalik ijrogacha boʻlgan rejalashtirish turlarining iyerarxik va vaqtinchalik ketma-ketligini (uzoq muddatlidan qisqa muddatliga qarab) belgilang:\n1. 1-3 yillik davrni qamrab oluvchi, taʼlim dasturlarini yangilash va pedagoglar salohiyatini oshirishga qaratilgan taktik rejalashtirish\n2. 3-5 yillik yoki undan ortiq davrga moʻljallangan, muassasaning rivojlanish modeli va moddiy bazasini modernizatsiya qilishga qaratilgan strategik rejalashtirish\n3. Haftalik, oylik va choraklik vazifalarni realizatsiya qiluvchi, joriy oʻquv yili yakunigacha aniq tadbirlarni bajarishga qaratilgan operatsion rejalashtirish",
+            a: ["A) 2, 1, 3", "B) 2, 3, 1", "C) 1, 2, 3", "D) 3, 1, 2"],
+            correct: 0
+        },
+        {
+            q: "SWOT tahlil metodologiyasi asosida muassasaning strategik holatini baholash va qarorlar qabul qilish jarayonining mantiqiy algoritmini koʻrsating:\n1. Aniqlangan omillarning ichki yoki tashqi, ijobiy yoki salbiy taʼsir xususiyatiga koʻra guruhlanishi\n2. Har bir omilning strategiyaga taʼsir koʻrsatish darajasi va ustuvorlik shkalasi boʻyicha baholanishi\n3. Taʼlim natijalari, jihozlar holati hamda ish beruvchilar fikri aks etgan empirik maʼlumotlarni yigʻish\n4. Ichki imkoniyatlar va tashqi muhit faktorlarining oʻzaro matritsali bogʻliqligi asosida choralar belgilash",
+            a: ["A) 3, 1, 2, 4", "B) 3, 2, 1, 4", "C) 1, 3, 2, 4", "D) 1, 2, 3, 4"],
+            correct: 0
+        },
+        {
+            q: "Muassasada inklyuziv yoki texnologik yangilanish strategiyasini PDCA (Deming sikli) funksional boshqaruv mantiqi asosida joriy etish zanjirini aniqlang:\n1. Belgilangan chora-tadbirlar va rejaga muvofiq yangilangan didaktik loyihalarni amaliyotda bajarish (Do)\n2. Erishilgan taʼlim natijalarini dastlab rejalashtirilgan model va koʻrsatkichlar bilan taqqoslash (Check)\n3. Muassasaning yangi ehtiyojlaridan kelib chiqib maqsadlar, vazifalar, muddatlar va resurslarni belgilash (Plan)\n4. Tahlil yakunida aniqlangan kamchiliklarni bartaraf etish va keyingi sikl rejalariga tuzatish kiritish (Act)",
+            a: ["A) 3, 1, 2, 4", "B) 3, 2, 1, 4", "C) 1, 3, 2, 4", "D) 1, 2, 3, 4"],
+            correct: 0
+        },
+
+        // II. MOSLASHTIRISH TESTLARI (5 ta)
+        {
+            q: "Kasbiy taʼlim tashkilotining strategik asoslari va ularning mantiqiy-boshqaruv funksiyalarini moslashtiring:\n1. Missiya\n2. Vizion\n3. Asosiy qadriyatlar\nTa'riflar:\nX. Muassasaning kelajak tasavvuri boʻlib, tashkilotning uzoq muddatda qanday yakuniy holat yoki natijaga erishishini ifodalaydi.\nY. Muassasa nima sababdan mavjudligi, kimlar uchun qanday korporativ qiymat yaratishi va jamiyatga foydasini koʻrsatadi.\nZ. Boshqaruv qarorlari va tashkilot jamoasi faoliyatida, oʻzaro munosabatlarda amal qilinadigan muhim prinsiplardir.",
+            a: ["A) 1-Y, 2-X, 3-Z", "B) 1-X, 2-Y, 3-Z", "C) 1-Y, 2-Z, 3-X", "D) 1-Z, 2-X, 3-Y"],
+            correct: 0
+        },
+        {
+            q: "SWOT tahlil elementlari va ularning tashkiliy-muhit tabiatiga koʻra tasnifini muvofiqlashtiring:\n1. Kuchli va zaif tomonlar\n2. Imkoniyatlar va tahdidlar\n3. Zaif tomonlar va tahdidlarning kombinatsiyasi\nTa'riflar:\nX. Muassasaning bevosita nazoratidan tashqarida shakllanadigan, tashqi muhit bilan bogʻliq faktorlar.\nY. Muassasa oʻzi boshqarishi yoki sezilarli darajada taʼsir koʻrsatishi mumkin boʻlgan ichki muhit faktorlari.\nZ. Tashkiliy zaiflik va tashqi xavfning birgalikdagi taʼsirini baholash orqali yangilash rejasini tuzish sohasi.",
+            a: ["A) 1-Y, 2-X, 3-Z", "B) 1-X, 2-Y, 3-Z", "C) 1-Y, 2-Z, 3-X", "D) 1-Z, 2-X, 3-Y"],
+            correct: 0
+        },
+        {
+            q: "PEST tahlil faktorlari va ularning kasbiy taʼlim tizimidagi konseptual misollarini moslashtiring:\n1. Siyosiy-huquqiy omillar\n2. Iqtisodiy-ijtimoiy omillar\n3. Texnologik omillar\nMisollar:\nX. Sanoatda raqamli boshqaruv tizimlari kengayishi tufayli bitiruvchilardan yangi koʻnikmalarga ehtiyoj paydo boʻlishi.\nY. Hududda yangi yirik ishlab chiqarish korxonasi ochilishi natijasida muayyan kasblarga talabning ortishi.\nZ. Kasbiy taʼlim dasturlari hamda standartlariga qoʻyiladigan davlat meʼyoriy talablarining yangilanishi.",
+            a: ["A) 1-Z, 2-Y, 3-X", "B) 1-Y, 2-Z, 3-X", "C) 1-Z, 2-X, 3-Y", "D) 1-X, 2-Y, 3-Z"],
+            correct: 0
+        },
+        {
+            q: "Mehnat bozori ehtiyojlarini oʻrganish yoʻnalishlari va ularning strategik ahamiyatini moslashtiring:\n1. Kasbiy kompetensiyalar tahlili\n2. Bitiruvchilar bandligi monitoringi\n3. Hududiy rivojlanish dasturlari tahlili\nAhamiyati:\nX. Muassasaning amaldagi yakuniy taʼlim natijalari va malaka baholash tizimi samaradorligini baholash.\nY. Ish beruvchilar talab qiladigan dolzarb bilim va amaliy koʻnikmalar asosida oʻquv dasturlarini yangilash.\nZ. Yangi investitsiya loyihalarini inobatga olgan holda oʻrta va uzoq muddatli ustuvor yoʻnalishlarni belgilash.",
+            a: ["A) 1-Y, 2-X, 3-Z", "B) 1-X, 2-Y, 3-Z", "C) 1-Y, 2-Z, 3-X", "D) 1-Z, 2-X, 3-Y"],
+            correct: 0
+        },
+        {
+            q: "Muassasani rivojlantirish resurslari va ularning tarkibiy elementlarini muvofiqlashtiring:\n1. Inson resurslari\n2. Moddiy-texnik resurslar\n3. Axborot resurslari\nElementlar:\nX. Zamonaviy ustaxonalar, laboratoriyalar, texnologik jihozlar va oʻquv-ishlab chiqarish materiallari.\nY. Pedagog xodimlar, boshqaruv kadrlari, texnik mutaxassislar hamda hamkor korxonalarning ekspertlari.\nZ. Mehnat bozori maʼlumotlari, tizimli monitoring natijalari va elektron raqamli boshqaruv platformalari.",
+            a: ["A) 1-Y, 2-X, 3-Z", "B) 1-Z, 2-Y, 3-X", "C) 1-X, 2-Y, 3-Z", "D) 1-Y, 2-Z, 3-X"],
+            correct: 0
+        },
+
+        // III. VAZIYATLI (KEYS) TESTLARI (5 ta)
+        {
+            q: "Muassasada avtomobillarga texnik xizmat koʻrsatish yoʻnalishi mavjud, biroq hududda elektromobillar tarkibi tez surʼatlar bilan koʻpaymoqda, ustaxona jihozlari va pedagoglar malakasi esa zamonaviy talablarga mos kelmaydi. Strategik boshqaruv tamoyillariga koʻra rahbar birinchi navbatda qanday tizimli chora koʻrishi lozim?",
+            a: [
+                "A) Servis korxonalari ehtiyojini oʻrganish, dasturlarni yangilash, pedagoglarni qayta tayyorlash va yangi jihozlarni rejalashtirish",
+                "B) Mavjud darslar oʻz vaqtida oʻtilishini taʼminlash va joriy oʻquv rejasini oʻzgarishsiz qoldirish",
+                "C) Elektromobillar yoʻnalishiga qabul kvotalarini asossiz ravishda yopish va faqat anʼanaviy texnik xizmat soatlarini koʻpaytirish",
+                "D) Muammoning yechimini toʻliq korxonalar zimmasiga yuklab, muassasada faqat nazariy taʼlim berish shakliga oʻtish"
+            ],
+            correct: 0
+        },
+        {
+            q: "SWOT tahlili jarayonida muassasada yuqori malakali, tajribali pedagoglar mavjudligi (Kuchli tomon) hamda hududda yirik yangi sanoat korxonalari barpo etilayotganligi (Imkoniyat) aniqlandi. Matriksli strategik yondashuvga koʻra ushbu kombinatsiyadan qanday unumli foydalanish toʻgʻri hisoblanadi?",
+            a: [
+                "A) Tajribali pedagoglar yordamida korxonalar bilan hamkorlikda qoʻshma amaliy mashgʻulotlar va dual taʼlimni tashkil etish",
+                "B) Korxonalarning yangi texnologiyalaridan qatʼiy nazar, ichki oʻquv jarayonlarini faqat anʼanaviy metodlar asosida saqlash",
+                "C) Pedagog kadrlarni ishlab chiqarishdan butunlay ajratish va ularni faqat maʼmuriy hisobotlarni toʻldirishga yoʻnaltirish",
+                "D) Sanoat korxonalari ehtiyojlarini oʻrganishni keyingi strategik rejalashtirish (3-5 yillik) davriga qoldirish"
+            ],
+            correct: 0
+        },
+        {
+            q: "Uchta hududiy servis korxonasi muassasa bitiruvchilarida zamonaviy diagnostika uskunalaridan foydalanish koʻnikmalari va amaliy kompetensiyalari yetishmasligini bildirdi. Maʼlumotlarni boshqaruv qaroriga aylantirish algoritmi asosida rahbar qanday yoʻl tutishi shart?",
+            a: [
+                "A) Fikrni boshqa manbalar bilan solishtirish, dastur va pedagoglar tayyorgarligini tekshirish hamda dasturlarni korxona bilan yangilash",
+                "B) Ish beruvchilarning eʼtirozlarini asossiz deb baholab, amaldagi oʻquv-metodik majmualarni oʻzgarishsiz qoldirish",
+                "C) Diagnostika fanlarini oʻquv rejasidan butunlay chiqarib tashlash va soatlarni umumkasbiy nazariy fanlarga taqsimlash",
+                "D) Bitiruvchilar bandligi uchun masʼuliyatni toʻliq talabalarning oʻziga yuklash prinsiplarini qabul qilish"
+            ],
+            correct: 0
+        },
+        {
+            q: "Muassasani rivojlantirish rejasi doirasida 'Ish beruvchilar bilan hamkorlikni yaxshilash' maqsadi qoʻyilgan. Biroq ushbu maqsad loyihalarni baholash va resurslarni taqsimlash uchun yetarli darajada aniq emas. SMART mezonlari asosida ushbu yoʻnalishni mukammal formatga keltiring:",
+            a: [
+                "A) 2027-yil yakunigacha uchta ustuvor yoʻnalishda kamida oltita hududiy ish beruvchi bilan amaliy hamkorlikni yoʻlga qoʻyish",
+
         }
     ],
     "2": [
