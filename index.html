@@ -3,20 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kasbiy Ta'lim Menejmenti</title>
+    <title>Kasbiy Ta'lim Menejmenti — Akademik Baholash Bazasi</title>
     <!-- Telegram WebApp uchun rasmiy skript -->
     <script src="https://telegram.org"></script>
     <style>
         body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; background-color: var(--tg-theme-bg-color, #f4f4f9); color: var(--tg-theme-text-color, #222); margin: 0; padding: 15px; }
         .card { background: var(--tg-theme-secondary-bg-color, #fff); padding: 20px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); margin-bottom: 15px; }
-        h1 { font-size: 20px; text-align: center; color: #1a365d; margin-top: 0; }
+        h1 { font-size: 20px; text-align: center; color: #1a365d; margin-top: 0; margin-bottom: 5px; }
         .author { text-align: center; font-size: 13px; color: #718096; margin-bottom: 20px; }
         select, button { width: 100%; padding: 12px; margin: 10px 0; font-size: 15px; border-radius: 8px; border: 1px solid #cbd5e0; box-sizing: border-box; }
         button { background-color: #2481cc; color: white; border: none; font-weight: bold; cursor: pointer; }
         button:hover { background-color: #1c66a3; }
         .question { background: var(--tg-theme-bg-color, #f8fafc); border: 1px solid #e2e8f0; border-radius: 8px; padding: 15px; margin-bottom: 15px; }
-        .options label { display: block; background: var(--tg-theme-secondary-bg-color, #fff); border: 1px solid #cbd5e0; padding: 10px; margin: 6px 0; border-radius: 6px; cursor: pointer; }
-        .result { font-size: 16px; font-weight: bold; text-align: center; color: #2481cc; margin-top: 15px; }
+        .question-text { font-size: 15px; font-weight: 600; line-height: 1.5; margin-top: 0; margin-bottom: 12px; }
+        .options label { display: block; background: var(--tg-theme-secondary-bg-color, #fff); border: 1px solid #cbd5e0; padding: 12px; margin: 8px 0; border-radius: 6px; cursor: pointer; font-size: 14px; }
+        .options label:hover { background: #ebf8ff; border-color: #bee3f8; }
+        .options input[type="radio"] { margin-right: 8px; transform: scale(1.1); }
+        .result { font-size: 16px; font-weight: bold; text-align: center; color: #2481cc; margin-top: 15px; padding: 10px; background: #ebf8ff; border-radius: 6px; }
     </style>
 </head>
 <body>
@@ -28,27 +31,25 @@
     <label for="topicSelect"><strong>Mavzuni tanlang (38 ta mavzu):</strong></label>
     <select id="topicSelect" onchange="loadQuestions()">
         <option value="">-- Mavzuni tanlang --</option>
-        <option value="1">1-mavzu: Kasbiy amaliyot asoslari</option>
-        <option value="2">2-mavzu: Xalqaro hamkorlik va qoʻshma dasturlar</option>
-        <!-- Qolgan 3-38 gacha mavzular shu yerga tartib bilan qo'shiladi -->
+        <option value="1">1-mavzu: Kasbiy ta'lim tashkilotini strategik rejalashtirish</option>
+        <option value="2">2-mavzu: Kasbiy ta'lim tashkilotini boshqarish va KPI tizimi</option>
     </select>
 
     <div id="quizArea" style="display: none;">
         <div id="questionsContainer"></div>
         <button onclick="checkAnswers()">Natijani tekshirish</button>
-        <div id="resultArea" class="result"></div>
+        <div id="resultArea" style="display: none;" class="result"></div>
     </div>
 </div>
 
 <script>
-// Telegram WebApp ni ishga tushirish
 const tg = window.Telegram.WebApp;
-tg.expand(); // Oynani to'liq ekranga ochish
+if (tg) {
+    tg.expand();
+}
 
-// Akademik darajadagi test savollari bazasi
 const testDatabase = {
-    "1": [  
-        // I. KETMA-KETLIKNI ANIQLASH TESTLARI (4 ta)
+    "1": [
         {
             q: "Mehnat bozori tahlili natijalarini muassasada strategik qarorlar qabul qilish jarayoniga transformatsiya qilish bosqichlarining toʻgʻri ketma-ketligini aniqlang:\n1. Tashqi soʻrovlar, bitiruvchilar monitoringi va rasmiy statistika orqali empirik maʼlumotlarni yigʻish\n2. Yangi kasbiy koʻnikmalarni shakllantirish boʻyicha yakuniy oʻquv natijalarini muntazam monitoring qilish\n3. Aniqlangan ehtiyojlarni qondirish uchun muassasaning kadrlar, jihozlar va moliyaviy imkoniyatlarini baholash\n4. Dasturlarni yangilash, dual taʼlimni kengaytirish yoki resurslarni maqsadli yoʻnaltirish boʻyicha qaror qabul qilish",
             a: ["A) 1, 3, 4, 2", "B) 1, 4, 3, 2", "C) 3, 1, 4, 2", "D) 3, 4, 1, 2"],
@@ -69,8 +70,6 @@ const testDatabase = {
             a: ["A) 3, 1, 2, 4", "B) 3, 2, 1, 4", "C) 1, 3, 2, 4", "D) 1, 2, 3, 4"],
             correct: 0
         },
-
-        // II. MOSLASHTIRISH TESTLARI (5 ta)
         {
             q: "Kasbiy taʼlim tashkilotining strategik asoslari va ularning mantiqiy-boshqaruv funksiyalarini moslashtiring:\n1. Missiya\n2. Vizion\n3. Asosiy qadriyatlar\nTa'riflar:\nX. Muassasaning kelajak tasavvuri boʻlib, tashkilotning uzoq muddatda qanday yakuniy holat yoki natijaga erishishini ifodalaydi.\nY. Muassasa nima sababdan mavjudligi, kimlar uchun qanday korporativ qiymat yaratishi va jamiyatga foydasini koʻrsatadi.\nZ. Boshqaruv qarorlari va tashkilot jamoasi faoliyatida, oʻzaro munosabatlarda amal qilinadigan muhim prinsiplardir.",
             a: ["A) 1-Y, 2-X, 3-Z", "B) 1-X, 2-Y, 3-Z", "C) 1-Y, 2-Z, 3-X", "D) 1-Z, 2-X, 3-Y"],
@@ -96,100 +95,6 @@ const testDatabase = {
             a: ["A) 1-Y, 2-X, 3-Z", "B) 1-Z, 2-Y, 3-X", "C) 1-X, 2-Y, 3-Z", "D) 1-Y, 2-Z, 3-X"],
             correct: 0
         },
-
-        // III. VAZIYATLI (KEYS) TESTLARI (5 ta)
         {
             q: "Muassasada avtomobillarga texnik xizmat koʻrsatish yoʻnalishi mavjud, biroq hududda elektromobillar tarkibi tez surʼatlar bilan koʻpaymoqda, ustaxona jihozlari va pedagoglar malakasi esa zamonaviy talablarga mos kelmaydi. Strategik boshqaruv tamoyillariga koʻra rahbar birinchi navbatda qanday tizimli chora koʻrishi lozim?",
             a: [
-                "A) Servis korxonalari ehtiyojini oʻrganish, dasturlarni yangilash, pedagoglarni qayta tayyorlash va yangi jihozlarni rejalashtirish",
-                "B) Mavjud darslar oʻz vaqtida oʻtilishini taʼminlash va joriy oʻquv rejasini oʻzgarishsiz qoldirish",
-                "C) Elektromobillar yoʻnalishiga qabul kvotalarini asossiz ravishda yopish va faqat anʼanaviy texnik xizmat soatlarini koʻpaytirish",
-                "D) Muammoning yechimini toʻliq korxonalar zimmasiga yuklab, muassasada faqat nazariy taʼlim berish shakliga oʻtish"
-            ],
-            correct: 0
-        },
-        {
-            q: "SWOT tahlili jarayonida muassasada yuqori malakali, tajribali pedagoglar mavjudligi (Kuchli tomon) hamda hududda yirik yangi sanoat korxonalari barpo etilayotganligi (Imkoniyat) aniqlandi. Matriksli strategik yondashuvga koʻra ushbu kombinatsiyadan qanday unumli foydalanish toʻgʻri hisoblanadi?",
-            a: [
-                "A) Tajribali pedagoglar yordamida korxonalar bilan hamkorlikda qoʻshma amaliy mashgʻulotlar va dual taʼlimni tashkil etish",
-                "B) Korxonalarning yangi texnologiyalaridan qatʼiy nazar, ichki oʻquv jarayonlarini faqat anʼanaviy metodlar asosida saqlash",
-                "C) Pedagog kadrlarni ishlab chiqarishdan butunlay ajratish va ularni faqat maʼmuriy hisobotlarni toʻldirishga yoʻnaltirish",
-                "D) Sanoat korxonalari ehtiyojlarini oʻrganishni keyingi strategik rejalashtirish (3-5 yillik) davriga qoldirish"
-            ],
-            correct: 0
-        },
-        {
-            q: "Uchta hududiy servis korxonasi muassasa bitiruvchilarida zamonaviy diagnostika uskunalaridan foydalanish koʻnikmalari va amaliy kompetensiyalari yetishmasligini bildirdi. Maʼlumotlarni boshqaruv qaroriga aylantirish algoritmi asosida rahbar qanday yoʻl tutishi shart?",
-            a: [
-                "A) Fikrni boshqa manbalar bilan solishtirish, dastur va pedagoglar tayyorgarligini tekshirish hamda dasturlarni korxona bilan yangilash",
-                "B) Ish beruvchilarning eʼtirozlarini asossiz deb baholab, amaldagi oʻquv-metodik majmualarni oʻzgarishsiz qoldirish",
-                "C) Diagnostika fanlarini oʻquv rejasidan butunlay chiqarib tashlash va soatlarni umumkasbiy nazariy fanlarga taqsimlash",
-                "D) Bitiruvchilar bandligi uchun masʼuliyatni toʻliq talabalarning oʻziga yuklash prinsiplarini qabul qilish"
-            ],
-            correct: 0
-        },
-        {
-            q: "Muassasani rivojlantirish rejasi doirasida 'Ish beruvchilar bilan hamkorlikni yaxshilash' maqsadi qoʻyilgan. Biroq ushbu maqsad loyihalarni baholash va resurslarni taqsimlash uchun yetarli darajada aniq emas. SMART mezonlari asosida ushbu yoʻnalishni mukammal formatga keltiring:",
-            a: [
-                "A) 2027-yil yakunigacha uchta ustuvor yoʻnalishda kamida oltita hududiy ish beruvchi bilan amaliy hamkorlikni yoʻlga qoʻyish",
-
-        }
-    ],
-    "2": [
-        {
-            q: "Vazirlar Mahkamasining 614-sonli qaroriga muvofiq, qo'shma ta'lim dasturlarida mutaxassislik fanlarining minimal xalqaro ulushi qancha bo'lishi qonuniy shart hisoblanadi?",
-            a: ["Kamida 25 foizi xorijiy hamkor dasturi asosida bo'lishi", "Kamida 50 foizi xorijiy hamkor dasturi asosida bo'lishi", "To'liq 100 foiz xalqaro dasturga o'tkazilishi"],
-            correct: 0
-        }
-    ]
-
-    // 38-mavzugacha shu tartibda ob'ekt ichida davom etadi...
-};
-
-function loadQuestions() {
-    const topicId = document.getElementById("topicSelect").value;
-    const quizArea = document.getElementById("quizArea");
-    const container = document.getElementById("questionsContainer");
-    const resultArea = document.getElementById("resultArea");
-    
-    resultArea.innerHTML = "";
-    if (!topicId || !testDatabase[topicId]) {
-        quizArea.style.display = "none";
-        return;
-    }
-    
-    quizArea.style.display = "block";
-    container.innerHTML = "";
-
-    testDatabase[topicId].forEach((item, qIndex) => {
-        let qHtml = `<div class="question"><p><strong>${qIndex + 1}. ${item.q}</strong></p><div class="options">`;
-        item.a.forEach((option, oIndex) => {
-            qHtml += `<label><input type="radio" name="q${qIndex}" value="${oIndex}"> ${option}</label>`;
-        });
-        qHtml += `</div></div>`;
-        container.innerHTML += qHtml;
-    });
-}
-
-function checkAnswers() {
-    const topicId = document.getElementById("topicSelect").value;
-    const questions = testDatabase[topicId];
-    let score = 0;
-
-    questions.forEach((item, qIndex) => {
-        const selected = document.querySelector(`input[name="q${qIndex}"]:checked`);
-        if (selected && parseInt(selected.value) === item.correct) {
-            score++;
-        }
-    });
-
-    document.getElementById("resultArea").innerHTML = `Natija: ${questions.length} ta savoldan ${score} ta to'g'ri.`;
-    
-    // Telegramga qisqa tebranish effekti berish (Haptic Feedback)
-    if (tg.HapticFeedback) {
-        tg.HapticFeedback.notificationOccurred("success");
-    }
-}
-</script>
-</body>
-</html>
